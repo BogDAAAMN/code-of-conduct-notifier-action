@@ -4,7 +4,7 @@ description: "Hello"
 inputs:
   comment-body:
     description: The comment that the bot will post about the Code of Conduct
-    default: "hey!"
+    default: "Please refer to our current Code of Conduct: https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/CODE_OF_CONDUCT.md"
 
 runs:
   using: "composite"
