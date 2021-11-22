@@ -12,7 +12,7 @@ runs:
       env:
         COMMENT: |
           Mona este
-          viata mea
+          viata mea and **markdown** support [hey](http://example.com)
       with:
         script: |
           const { COMMENT } = process.env
