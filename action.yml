@@ -4,7 +4,7 @@ description: "Hello"
 inputs:
   coc-url:
     description: The URL to the Code of Conduct. Used to mention in the body of the comment
-    default: "/blob/main/CODE_OF_CONDUCT.md"
+    default: "CODE_OF_CONDUCT.md"
   comment-body:
     description: The comment that the bot will post about the Code of Conduct
     default: "Please refer to our current Code of Conduct: <URL>"
@@ -12,6 +12,18 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Build the CoC URL
+      shell: bash
+      run: |
+        regex='https?://[^ ]+'
+        url=${{ inputs.coc-url }}
+        
+        if [[ $url =~ $regex ]]
+        then 
+            echo ${{ inputs.coc-url }}
+        else
+            echo "https://${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
+        fi
     - uses: actions/github-script@v5
       if: contains(github.event.comment.body, 'code of conduct') 
       env:
