@@ -2,9 +2,12 @@ name: "Code of Conduct Notifier"
 description: "Hello"
 
 inputs:
+  coc-url:
+    description: The URL to the Code of Conduct. Used to mention in the body of the comment
+    default: "/blob/main/CODE_OF_CONDUCT.md"
   comment-body:
     description: The comment that the bot will post about the Code of Conduct
-    default: "Please refer to our current Code of Conduct: https://github.com/`${context.repo.owner}`/`${context.repo.repo}`/blob/main/CODE_OF_CONDUCT.md"
+    default: "Please refer to our current Code of Conduct: <URL>"
 
 runs:
   using: "composite"
