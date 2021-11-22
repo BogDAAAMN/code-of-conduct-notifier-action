@@ -1,18 +1,17 @@
 name: "Code of Conduct Notifier"
 description: "Hello"
 
+inputs:
+  comment-body:
+    description: The comment that the bot should post about the Code of Conduct
+    default: "hey!"
+
 runs:
   using: "composite"
   steps:
-    - name: Install Deta CLI
-      shell: bash
-      run: |
-        echo ${{ github.event.comment.body }}   
     - uses: actions/github-script@v5
       env:
-        COMMENT: |
-          Mona este
-          viata mea and **markdown** support [hey](http://example.com)
+        COMMENT: ${{ inputs.comment-body }}
       with:
         script: |
           const { COMMENT } = process.env
