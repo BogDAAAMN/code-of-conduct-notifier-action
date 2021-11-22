@@ -1,0 +1,10 @@
+name: "Code of Conduct Notifier"
+description: "Hello"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Deta CLI
+      shell: bash
+      run: |
+        echo "hey!"
