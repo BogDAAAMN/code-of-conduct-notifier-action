@@ -20,14 +20,16 @@ runs:
         
         if [[ $url =~ $regex ]]
         then 
-            echo ${{ inputs.coc-url }}
+            export COCURL=${{ inputs.coc-url }}
         else
-            echo "https://github.com/${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
+            export COCURL="https://github.com/${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
         fi
+        
+        echo $COCURL
     - uses: actions/github-script@v5
       if: contains(github.event.comment.body, 'code of conduct') 
       env:
-        COMMENT: ${{ inputs.comment-body }}
+        COMMENT: "hey"
       with:
         script: |
           const { COMMENT } = process.env
