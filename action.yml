@@ -9,11 +9,15 @@ runs:
       run: |
         echo ${{ github.event.comment.body }}   
     - uses: actions/github-script@v5
+      env:
+        COMMENT: Mona
       with:
         script: |
+          const { COMMENT } = process.env
+          
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: $GITHUB_REF
+            body: `Hello ${COMMENT}`
           });   
