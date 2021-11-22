@@ -20,7 +20,11 @@ runs:
         then 
             export COCURL=${{ inputs.coc-url }}
         else
-            export COCURL="https://github.com/${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
+            if [[ ${{ inputs.coc-url }} = '/*'* ]]
+            then
+                export COCURL="https://github.com/${{ github.repository }}/blob/main${{ inputs.coc-url }}"
+            else
+                export COCURL="https://github.com/${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
         fi
         
         echo $COCURL
