@@ -9,11 +9,11 @@ runs:
       run: |
         echo ${{ github.event.comment.body }}   
     - uses: actions/github-script@v5
-        with:
-          script: |
-            github.reactions.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              content: "hey"
-            });   
+      with:
+        script: |
+          github.reactions.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            content: "hey"
+          });   
