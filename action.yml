@@ -8,7 +8,7 @@ runs:
       shell: bash
       run: |
         echo ${{ github.event.comment.body }}   
-    - uses: actions/github-script@v4
+    - uses: actions/github-script@v5
         with:
           script: |
             github.reactions.createComment({
