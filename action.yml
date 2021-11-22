@@ -15,7 +15,7 @@ runs:
     - name: Build the CoC URL
       shell: bash
       run: |
-        if [[ ${{ inputs.coc-url }} =~ 'https?://[^ ]+'* ]]
+        if [[ ${{ inputs.coc-url }} =~ ^https?://[^ ]+$ ]]
         then 
             export COCURL=${{ inputs.coc-url }}
         else
