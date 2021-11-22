@@ -3,13 +3,14 @@ description: "Hello"
 
 inputs:
   comment-body:
-    description: The comment that the bot should post about the Code of Conduct
+    description: The comment that the bot will post about the Code of Conduct
     default: "hey!"
 
 runs:
   using: "composite"
   steps:
     - uses: actions/github-script@v5
+      if: contains(github.event.comment.body, 'code of conduct') 
       env:
         COMMENT: ${{ inputs.comment-body }}
       with:
