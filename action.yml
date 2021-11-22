@@ -25,6 +25,7 @@ runs:
                 export COCURL="https://github.com/${{ github.repository }}/blob/main${{ inputs.coc-url }}"
             else
                 export COCURL="https://github.com/${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
+            fi
         fi
         
         echo $COCURL
