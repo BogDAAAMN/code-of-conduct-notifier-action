@@ -10,7 +10,9 @@ runs:
         echo ${{ github.event.comment.body }}   
     - uses: actions/github-script@v5
       env:
-        COMMENT: Mona
+        COMMENT: |
+          Mona este
+          viata mea
       with:
         script: |
           const { COMMENT } = process.env
