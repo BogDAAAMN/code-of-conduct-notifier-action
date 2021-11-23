@@ -54,11 +54,13 @@ runs:
             if (regex.test(urlInput)) {
               return urlInput;
             } else {
+              console.log("https://github.com/" + context.repo.owner + "/" + context.repo.repo + urlInput.startsWith('/') ? "" : "/" + urlInput);
               return "https://github.com/" + context.repo.owner + "/" + context.repo.repo + urlInput.startsWith('/') ? "" : "/" + urlInput;
             }
           }
           
           const cocUrl = buildUrl(URL);
+          console.log(cocUrl);
           
           github.rest.issues.createComment({
             issue_number: context.issue.number,
