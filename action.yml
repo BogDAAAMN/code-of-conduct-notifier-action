@@ -12,33 +12,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-#     - name: Build the CoC URL
-#       shell: bash
-#       run: |
-#         regex="https?://[^ ]+"
-        
-#         if [[ "${{ inputs.coc-url }}" =~ $regex ]]
-#         then 
-#             export COCURL="${{ inputs.coc-url }}"
-#         else
-#             if [[ "${{ inputs.coc-url }}" = "/*"* ]]
-#             then
-#                 export COCURL="https://github.com/${{ github.repository }}/blob/main${{ inputs.coc-url }}"
-#             else
-#                 export COCURL="https://github.com/${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
-#             fi
-#         fi
-        
-#         echo $COCURL
-#     - name: Build the body message
-#       shell: bash
-#       run: |
-#         ecgo "$COCURL"
-        
-#         comment="${{ inputs.comment-body }}"
-#         export BODY=$(sed 's/<URL>/'$COCURL'/g' <<<"${{ inputs.comment-body }}")
-        
-#         echo $BODY
     - uses: actions/github-script@v5
       if: contains(github.event.comment.body, 'code of conduct') 
       env:
