@@ -61,16 +61,21 @@ runs:
             }
           }
           
+          // Function to build the final message
+          // by replacing the `<URL>` tag with the actual URL
           function buildBody(comment, url){
             return comment.replace('<URL>', url);
           }
           
+          // Build the url and log it
           const cocUrl = buildUrl(URL);
           console.log(cocUrl);
-
+          
+          // Build the message and log it
           const body = buildBody(COMMENT, cocUrl);
           console.log(body);
           
+          // Create the comment with respect to the issue number
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
