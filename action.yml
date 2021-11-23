@@ -12,44 +12,57 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Build the CoC URL
-      shell: bash
-      run: |
-        regex="https?://[^ ]+"
+#     - name: Build the CoC URL
+#       shell: bash
+#       run: |
+#         regex="https?://[^ ]+"
         
-        if [[ "${{ inputs.coc-url }}" =~ $regex ]]
-        then 
-            export COCURL="${{ inputs.coc-url }}"
-        else
-            if [[ "${{ inputs.coc-url }}" = "/*"* ]]
-            then
-                export COCURL="https://github.com/${{ github.repository }}/blob/main${{ inputs.coc-url }}"
-            else
-                export COCURL="https://github.com/${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
-            fi
-        fi
+#         if [[ "${{ inputs.coc-url }}" =~ $regex ]]
+#         then 
+#             export COCURL="${{ inputs.coc-url }}"
+#         else
+#             if [[ "${{ inputs.coc-url }}" = "/*"* ]]
+#             then
+#                 export COCURL="https://github.com/${{ github.repository }}/blob/main${{ inputs.coc-url }}"
+#             else
+#                 export COCURL="https://github.com/${{ github.repository }}/blob/main/${{ inputs.coc-url }}"
+#             fi
+#         fi
         
-        echo $COCURL
-    - name: Build the body message
-      shell: bash
-      run: |
-        ecgo "$COCURL"
+#         echo $COCURL
+#     - name: Build the body message
+#       shell: bash
+#       run: |
+#         ecgo "$COCURL"
         
-        comment="${{ inputs.comment-body }}"
-        export BODY=$(sed 's/<URL>/'$COCURL'/g' <<<"${{ inputs.comment-body }}")
+#         comment="${{ inputs.comment-body }}"
+#         export BODY=$(sed 's/<URL>/'$COCURL'/g' <<<"${{ inputs.comment-body }}")
         
-        echo $BODY
+#         echo $BODY
     - uses: actions/github-script@v5
       if: contains(github.event.comment.body, 'code of conduct') 
       env:
-        COMMENT: ${{ env.BODY }}
+        COMMENT: ${{ inputs.comment-body }}
+        URL: $ {{ inputs.coc-url }}
       with:
         script: |
-          const { COMMENT } = process.env
+          const { COMMENT, URL } = process.env
+          
+          function buildUrl(urlInput) {
+            const regex = new RegExp('https?://[^ ]+');
+
+            if (regex.test(urlInput)) {
+              return urlInput;
+            } else {
+              return "https://github.com/" + context.repo.owner + "/" + context.repo.repo + url_input.startsWith('/') ? "" : "/" + urlInput;
+            }
+          }
+          
+          const cocUrl = buildUrl(URL);
           
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: `Hello ${COMMENT}`
+            body: `Hello ${cocUrl}`
           });   
