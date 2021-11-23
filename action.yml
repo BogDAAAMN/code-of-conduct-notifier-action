@@ -55,7 +55,7 @@ runs:
               return urlInput;
             } else {
               // console.log("https://github.com/" + context.repo.owner + "/" + context.repo.repo + urlInput.startsWith('/') ? "" : "/" + urlInput);
-              return `https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/${urlInput}`;
+              return `https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main${urlInput.startsWith('/') ? "" : "/"}${urlInput}`;
             }
           }
           
