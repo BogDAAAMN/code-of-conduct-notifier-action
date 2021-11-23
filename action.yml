@@ -53,7 +53,7 @@ runs:
             const regex = new RegExp('https?://[^ ]+');
             
             // If it is an absolute URL, return it as it is
-            if (regex.test(urlInput)) {
+            if (regex.test(urlInput) || !urlInput) {
               return urlInput;
             } else {
               // If not, build the URL relative to the context repo
