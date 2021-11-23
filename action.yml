@@ -35,6 +35,8 @@ runs:
       run: |
         comment="${{ inputs.comment-body }}"
         export BODY=${comment//<URL>/$COCURL}
+        
+        echo $BODY
     - uses: actions/github-script@v5
       if: contains(github.event.comment.body, 'code of conduct') 
       env:
