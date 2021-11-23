@@ -54,8 +54,8 @@ runs:
             if (regex.test(urlInput)) {
               return urlInput;
             } else {
-              console.log("https://github.com/" + context.repo.owner + "/" + context.repo.repo + urlInput.startsWith('/') ? "" : "/" + urlInput);
-              return "https://github.com/" + context.repo.owner + "/" + context.repo.repo + urlInput.startsWith('/') ? "" : "/" + urlInput;
+              // console.log("https://github.com/" + context.repo.owner + "/" + context.repo.repo + urlInput.startsWith('/') ? "" : "/" + urlInput);
+              return `https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/${urlInput}`;
             }
           }
           
