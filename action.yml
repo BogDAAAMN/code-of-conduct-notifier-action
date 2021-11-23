@@ -62,7 +62,7 @@ runs:
           }
           
           function buildBody(comment, url){
-            return comment.replaceAll('<URL>', url);
+            return comment.replace('<URL>', url);
           }
           
           const cocUrl = buildUrl(URL);
@@ -76,4 +76,4 @@ runs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             body: body
-          });   
+          });
