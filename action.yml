@@ -33,7 +33,8 @@ runs:
     - name: Build the body message
       shell: bash
       run: |
-        export BODY=${"${{ inputs.comment-body }}"//<URL>/$COCURL}
+        comment=${{ inputs.comment-body }}
+        export BODY=${comment//<URL>/$COCURL}
     - uses: actions/github-script@v5
       if: contains(github.event.comment.body, 'code of conduct') 
       env:
