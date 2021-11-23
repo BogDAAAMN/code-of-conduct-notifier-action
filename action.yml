@@ -43,7 +43,7 @@ runs:
       if: contains(github.event.comment.body, 'code of conduct') 
       env:
         COMMENT: ${{ inputs.comment-body }}
-        URL: $ {{ inputs.coc-url }}
+        URL: ${{ inputs.coc-url }}
       with:
         script: |
           const { COMMENT, URL } = process.env
