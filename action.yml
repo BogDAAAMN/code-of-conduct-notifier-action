@@ -16,6 +16,7 @@ runs:
       shell: bash
       run: |
         regex="https?://[^ ]+"
+        
         if [[ "${{ inputs.coc-url }}" =~ $regex ]]
         then 
             export COCURL="${{ inputs.coc-url }}"
@@ -29,10 +30,14 @@ runs:
         fi
         
         echo $COCURL
+    - name: Build the body message
+      shell: bash
+      run: |
+        export BODY=${${{ inputs.comment-body }}//<URL>/$COCURL}
     - uses: actions/github-script@v5
       if: contains(github.event.comment.body, 'code of conduct') 
       env:
-        COMMENT: "hey"
+        COMMENT: ${{ env.BODY }}
       with:
         script: |
           const { COMMENT } = process.env
