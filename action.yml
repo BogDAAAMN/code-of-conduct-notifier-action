@@ -34,7 +34,7 @@ runs:
       shell: bash
       run: |
         comment="${{ inputs.comment-body }}"
-        export BODY=$sed 's/<URL>/'$COCURL'/g' <<<"${{ inputs.comment-body }}"
+        export BODY=$(sed 's/<URL>/$COCURL/g' <<<"${{ inputs.comment-body }}")
         
         echo $BODY
     - uses: actions/github-script@v5
