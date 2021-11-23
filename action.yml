@@ -15,12 +15,12 @@ runs:
     - name: Build the CoC URL
       shell: bash
       run: |
-        regex='https?://[^ ]+'
-        if [[ ${{ inputs.coc-url }} =~ $regex ]]
+        regex="https?://[^ ]+"
+        if [[ "${{ inputs.coc-url }}" =~ $regex ]]
         then 
-            export COCURL=${{ inputs.coc-url }}
+            export COCURL="${{ inputs.coc-url }}"
         else
-            if [[ '${{ inputs.coc-url }}' = '/*'* ]]
+            if [[ "${{ inputs.coc-url }}" = "/*"* ]]
             then
                 export COCURL="https://github.com/${{ github.repository }}/blob/main${{ inputs.coc-url }}"
             else
