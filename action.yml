@@ -1,5 +1,5 @@
 name: "Code of Conduct Notifier"
-description: "Hello"
+description: "This is a simple GitHub Action that notifies the members of the community of their Code of Conduct document when this is mentioned"
 
 inputs:
   coc-url:
