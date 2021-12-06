@@ -7,7 +7,7 @@ inputs:
     default: "CODE_OF_CONDUCT.md"
   comment-body:
     description: The comment that the bot will post about the Code of Conduct
-    default: "Please refer to our current Code of Conduct: <URL>"
+    default: "For questions about our community guidelines, please refer to our Code of Conduct: <URL>."
 
 runs:
   using: "composite"
