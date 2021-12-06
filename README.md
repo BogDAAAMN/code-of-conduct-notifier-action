@@ -1,5 +1,7 @@
 # Code of Conduct Notifier Action
 
+![Actions Bot commenting "Please keep our community guidelines in mind while posting. Your message violates our code of conduct and has been removed."](./static/coc-notifier-action-gh.png)
+
 ## Description
 The challenge of managing online communities is continuously growing. Often times the members are spread across multiple platforms, making it harder to get a complete snapshot of its members' interactions and behavior. While platforms employ different tools and methods to moderate (potentially harmful) conversations, the moderators' priority will always be to create a safe and positive community experience for everybody. This Action aims to help just a little bit the GitHub communities moderators into enforcing their Code of Conduct. 
 
