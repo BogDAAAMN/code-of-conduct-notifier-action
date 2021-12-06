@@ -1,10 +1,57 @@
 name: "Code of Conduct Notifier"
-description: "Hello"
+description: "This is a simple GitHub Action that notifies the members of the community of their Code of Conduct document when this is mentioned"
+
+inputs:
+  coc-url:
+    description: The URL to the Code of Conduct. Used to mention in the body of the comment
+    default: "CODE_OF_CONDUCT.md"
+  comment-body:
+    description: The comment that the bot will post about the Code of Conduct
+    default: "For questions about our community guidelines, please refer to our Code of Conduct: <URL>."
 
 runs:
   using: "composite"
   steps:
-    - name: Install Deta CLI
-      shell: bash
-      run: |
-        echo "hey!"
+    - uses: actions/github-script@v5
+      if: contains(github.event.comment.body, 'code of conduct') 
+      env:
+        COMMENT: ${{ inputs.comment-body }}
+        URL: ${{ inputs.coc-url }}
+      with:
+        script: |
+          const { COMMENT, URL } = process.env
+          
+          // Function to build the URL that is included in the body
+          function buildUrl(urlInput) {
+            const regex = new RegExp('https?://[^ ]+');
+            
+            // If it is an absolute URL, return it as it is
+            if (regex.test(urlInput) || !urlInput) {
+              return urlInput;
+            } else {
+              // If not, build the URL relative to the context repo
+              return `https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main${urlInput.startsWith('/') ? "" : "/"}${urlInput}`;
+            }
+          }
+          
+          // Function to build the final message
+          // by replacing the `<URL>` tag with the actual URL
+          function buildBody(comment, url){
+            return comment.replace('<URL>', url);
+          }
+          
+          // Build the url and log it
+          const cocUrl = buildUrl(URL);
+          console.log(cocUrl);
+          
+          // Build the message and log it
+          const body = buildBody(COMMENT, cocUrl);
+          console.log(body);
+          
+          // Create the comment with respect to the issue number
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: body
+          });
