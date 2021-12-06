@@ -1,5 +1,6 @@
 name: "Code of Conduct Notifier"
-description: "This is a simple GitHub Action that notifies the members of the community of their Code of Conduct document when this is mentioned"
+author: "Bogdan Covrig"
+description: "A simple GitHub Action that notifies the members of the community of their Code of Conduct document when this is mentioned"
 
 inputs:
   coc-url:
@@ -55,3 +56,7 @@ runs:
             repo: context.repo.repo,
             body: body
           });
+
+branding:
+  icon: file-text
+  color: red
